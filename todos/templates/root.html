@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load render_bundle from webpack_loader %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <meta name="description" content="Todos">
+        {% block head %}
+        {% endblock head %}
+        <title>TODOs</title>
+    </head>
+    <body>
+        <div id="todos-wrapper"></div>
+        {% render_bundle 'main' %}
+    </body>
+</html>
