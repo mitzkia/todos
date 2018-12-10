@@ -13,7 +13,7 @@ Clone this repository an cd into it.
 Install Django and other dependencies. It is recommended to use the Python virtual environment to keep the requirements isolated.
 Inside the project folder:
 
-    python-virtualenv -p python3 env
+    virtualenv -p python3 env
     source env/bin/activate
     pip install -r requirements.txt
 
