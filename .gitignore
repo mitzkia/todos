@@ -4,7 +4,8 @@ site_media/
 static/bundles/
 node_modules/
 *~
-*.PYC
+__pycache__/
+*.pyc
 *.log
 *.swp
 *.db
