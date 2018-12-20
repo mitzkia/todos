@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import axiosDefaults from 'axios/lib/defaults';
+import { AppComponent } from './components/app';
 
 axiosDefaults.xsrfHeaderName = "X-CSRFToken";
 axiosDefaults.validateStatus = function (status) {
@@ -8,7 +9,7 @@ axiosDefaults.validateStatus = function (status) {
 };
 axiosDefaults.timeout = 10000; // 10s
 
+ReactDom.render(
+    <AppComponent />
+  , document.getElementById('todos-wrapper'))
 
-ReactDom.render((
-    <h1>Hello from index.js</h1>
-  ), document.getElementById('todos-wrapper'))
