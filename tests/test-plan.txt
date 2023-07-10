@@ -1,0 +1,12 @@
+Tasks:
+1, Bootstrap environment
+2, Start server
+3, Freestyle manual test for the UI
+4, Bootstrap testcases
+5, Write inital automation testcase for endpoint-level
+6, Extend automation testcases for endpoint
+7, Write inital automation testcase for frontend
+8, Extend automation testcases for frontend
+9, Create bug report from found issues
+10, Run testcases via Github CI
+
