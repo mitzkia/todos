@@ -182,8 +182,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '60/minute',
-        'user': '60/minute'
+        'anon': '600/minute',
+        'user': '600/minute'
     },
     'DATETIME_FORMAT': 'iso-8601',
     'DATETIME_INPUT_FORMATS': ['iso-8601', '%d.%m.%Y %H:%M'],
