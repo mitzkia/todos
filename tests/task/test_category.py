@@ -36,6 +36,16 @@ class CategoryTest(TestCase):
             [OrderedDict(CUSTOM_VALID_CATEGORY)],
         )
 
+    def test_create_same_category_twice(self):
+        # check if creating same category name does not work
+        self.task_executor.create_category(CUSTOM_VALID_CATEGORY)
+        response = self.task_executor.create_category(CUSTOM_VALID_CATEGORY)
+        self.assertTrue(self.response_validator.is_negative_response(response))
+        self.assertEqual(
+            self.task_executor.get_categories().data,
+            [OrderedDict(CUSTOM_VALID_CATEGORY)],
+        )
+
     def test_create_category_with_higher_id_value(self):
         # check if creating new custom category with higher id number, creates category with default lower id
         response = self.task_executor.create_category(
