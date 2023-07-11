@@ -1,0 +1,131 @@
+Test plan for automation testcases for frontend
+-----------------------------------------------
+test 1: Check if start page can loaded
+    - check if default form elements are exists: 
+        - "Select Category" dropdown list element
+        - "New Category" input field
+        - Add button for "New Category"
+        - Logo and name of the page
+
+test 2: Check for default categories in dropdown list, are they exists and selectable:
+    - School
+    - Work
+    - Other
+    - Christmas
+
+test 3: Add new (valid) categories, and check if they are selectable immediately from the dropdown list element
+    - check_for_category_fields("selected_category") == this function checks if the corresponding UI fields of the selected category are loaded and exist on the page:
+        - category name
+        - delete button for the category
+        - task table for the category (column names: Title, Description, Deadline)
+        - Add task button
+        - Input field for Title, Description and Deadline
+
+test 4: Add new (valid) categories, and check if they are selectable (from the dropdown list element) after a page reload
+    - check_for_category_fields("selected_category")
+
+test 5: Add new (valid) categories, and check if they are selectable (from the dropdown list element) after navigating into a different page (http://localhost:8000/api/categories/) and back
+    - check_for_category_fields("selected_category")
+
+test 6: Add new (valid) categories, and check if they are selectable (from the dropdown list element) after restarting server
+    - check_for_category_fields("selected_category")
+
+test 7: Add new invalid categories, and check if they are not selectable (from the dropdown list element)
+    - of course this testcase should be devided into separate testcases
+    - too long name
+    - same name twice
+    - SQL injecton
+
+test 8: Delete specific category, and check if it has removed from dropdown list element
+
+test 9: Delete all existing categories, and check if they has removed from dropdown list element
+
+test 10: Add (valid) multiple tasks for one specific category
+    - with '<button type="action" class="ui button" style="background-color: darkblue; color: white;">Add task</button>'
+    - check_for_task_fields("selected_category") == this function checks the saved task field values are correct for the selected category:
+        - table values for Title, Description and Deadline
+
+test 11: Edit already existing task values and page reload
+    - with '<button value="2" class="ui icon button" style="background-color: darkblue; color: white;"><i aria-hidden="true" class="edit icon"></i></button>'
+    - with '<button class="ui button" style="background-color: darkblue; color: white;">Save changes</button>'
+    - notice: here I found a strange issue when I replacing the Title and Description fields I can write new value letters by letters (somehow the input fields loose the focus)
+    - check if new values (for Title, Description and Date) are saved and can be loaded after a page reload
+
+test 12: Edit already existing task values and server restart
+    - with '<button value="2" class="ui icon button" style="background-color: darkblue; color: white;"><i aria-hidden="true" class="edit icon"></i></button>'
+    - with '<button class="ui button" style="background-color: darkblue; color: white;">Save changes</button>'
+    - check if new values (for Title, Description and Date) are saved and can be loaded after a server restart
+
+test 13: Edit already existing task values and drop changes before saving
+    - with '<button class="ui icon button" style="background-color: darkblue; color: white;"><i aria-hidden="true" class="close icon"></i></button>'
+    - check if new values are not saved and original values are loaded
+
+test 13: Add new task without "Title"
+    - with '<button type="action" class="ui button" style="background-color: darkblue; color: white;">Add task</button>'
+    - task should be created if the UI did allows to commit the page with "Add task" button
+
+test 14: Add new task without "Description"
+    - with '<button type="action" class="ui button" style="background-color: darkblue; color: white;">Add task</button>'
+    - task should be created if the UI did allows to commit the page with "Add task" button
+    - notice: the JS error is not propagated back to the user
+    - In my opinion here we can improve the UI with a small change: 
+        - I would add a "required" property to the input field to visually show this field is mandatory
+
+test 15: Add new task without "Date"
+    - with '<button type="action" class="ui button" style="background-color: darkblue; color: white;">Add task</button>'
+    - task should be created if the UI did allows to commit the page with "Add task" button
+    - notice: the error is not propagated back to the user
+    - In my opinion here we can improve the UI with a small change: 
+        - I would add a "required" property to the date field to visually show this field is mandatory
+
+test 16: Check existing tasks as done (finished)
+    - with '<button value="2" class="ui icon button" style="background-color: lightseagreen; color: white;"><i aria-hidden="true" class="checkmark icon"></i></button>'
+    - notice: the icon should be replaced, because the function behind it is not intuitive
+    - notice 2: maybe it would be visually better if the finished tasks shown as "strikethrough element" with <s>some text</s>
+
+test 17: Add new invalid task elements and check if they are not created
+    - of course this testcase should be devided into separate testcases
+    - too long Title, Description
+    - same Title twice
+    - SQL injection in Title, Description field
+    - invalid type to Date field
+
+test 18: After created a new task delete it's parent category
+    - check if the category and task is also deleted
+    - notice: Here I would give a warning to the user about the corresponding task will not linked to any category and the task also will be deleted
+
+test 19: Edit a task, and also mark it as done
+    - Step1: create a new category
+    - Step2: create a task for the category
+    - Step3: Edit the task
+    - Step4: Mark task as done/finished
+    - Step5: Rename task original Title and Description (edit fields are still on page)
+    - Step6: Commit the new Title and Description with "Save changes" button
+    - Check if the new replaced tasks has been saved
+    - Notice: this is a bug here, the "Save changes" button applied, but the new data did not saved
+
+test 20: Check if the server is accessible from multiple clients paralelly
+    - the page should be loaded successfully
+
+test 21: Check if the server can load all kind of endpoints:
+- admin/
+- api/categories/
+- api/categories/create/
+- api/categories/edit/<int:category_id>
+- api/categories/delete/<int:category_id>
+- api/category_tasks/<int:category_id>
+- api/tasks/
+- api/tasks/create/
+- api/tasks/edit/<int:task_id>
+- api/tasks/delete/<int:task_id>
+
+test 22: Test login with valid username/password
+- login should work without error
+
+test 23: Test login with invalid username/password
+- login should not be work, auth error should be displayed
+
+test 24: Check not existing endpoints:
+- for example: aasdf/, api/asdf, admin/asdf, api/categories/asdf
+- pages should not loaded, error should be displayed
+
