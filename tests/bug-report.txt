@@ -1,0 +1,47 @@
+Found bugs from automation testcases:
+1, test_create_same_category_twice()
+- in this case the expected behaviour would be do not allow to create same category name twice
+
+Found bugs from manual test of the frontend:
+Browser version
+Vivaldi	6.1.3035.111 (Stable channel) (64-bit) 
+Revision	b2568a9aaecd4a7793d10fa7b389233a3b18bee8
+OS	Windows 11 Version 22H2 (Build 22621.1848)
+JavaScript	V8 11.4.183.25
+User Agent	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36
+Command Line	"C:\Users\mitzk\AppData\Local\Vivaldi\Application\vivaldi.exe" --flag-switches-begin --flag-switches-end --save-page-as-mhtml
+Executable Path	C:\Users\mitzk\AppData\Local\Vivaldi\Application\vivaldi.exe
+Profile Path	C:\Users\mitzk\AppData\Local\Vivaldi\User Data\Default
+
+1, During editing a task I noticed that while rewriting 'Title' or 'Description' the input field looses the focus after each letter
+Expected behaviour: 
+Editing input fields should be seamless.
+
+2, Adding new task with empty "Description" field
+The page allows to save new task with empty "Description", but the task did not created.
+Expected behaviour:
+The page should visually show that the "Description" field is mandatory, and not allow to save change
+
+3, Adding new task with empty "Date" field
+The page allows to save new task with empty "Date", but the task did not created.
+Expected behaviour:
+The page should visually show that the "Date" field is mandatory, and not allow to save change
+
+4, Better visualisation of the "Done" or "Finished" tasks
+From the user perspective the current function behind it is not intuitive.
+I would suggest not to delete the finished task from the table, but make it somehow as a "strikethrough element"
+
+5, Warn a user when a category is deleted for a task
+Here I would give a warning to the user about the corresponding task will not linked to any category and the task(s) also will be deleted
+
+6, Saving task after it has been deleted
+Reproduction:
+- Step1: create a new category
+- Step2: create a task for the category
+- Step3: Edit the task
+- Step4: Mark task as done/finished (task should be dissappear from the list)
+- Step5: Rename task original Title and Description (edit fields are still shown on page)
+- Step6: Commit the new Title and Description with "Save changes" button
+Notice that the task did not saved
+Expected behaviour:
+- new task has been saved
